@@ -1,0 +1,49 @@
+.corTitulo{
+  color: #c1936b;
+}
+
+.fontSizeTitulo{
+  font-size: large;
+}
+
+.fontSizeRodape{
+  font-size: smaller;
+}
+
+.ajustesBotao{
+  background-color: #f3e8de;
+  color: #c1936b;
+  margin: 0 auto;
+  display: block;
+}
+
+.centralizarTexto{
+  text-align: center;
+}
+
+.cardCentral{
+  max-width: 400px;
+  margin: auto;
+  width: 60%;
+  margin-top: 1%;
+}
+
+.largura100{
+  width: 100%;
+}
+
+.largura50{
+  width: 50%;
+}
+
+.marginTop5{
+  margin-top: 5%;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: #c4a788 !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple{
+  background-color: #c4a788 !important;
+}

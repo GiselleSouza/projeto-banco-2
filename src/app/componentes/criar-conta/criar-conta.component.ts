@@ -3,6 +3,7 @@ import { CriarConta } from './../../models/criar-conta.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-criar-conta',
@@ -18,7 +19,8 @@ export class CriarContaComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private service: SalvarClienteService
+    private service: SalvarClienteService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -32,14 +34,18 @@ export class CriarContaComponent implements OnInit {
   }
 
   salvarDadosCliente() {
+    //isso só acontece em casos de sucesso
     this.alertaDadosSalvos();
+    this.router.navigateByUrl('componentes/login');
+
+    //para erros devemos adicionar um alertaDadosNaoSalvos
     const cliente: CriarConta = {nome: this.form.controls["nome"].value, email: this.form.controls["email"].value, senha: this.form.controls["senha"].value};
-    this.service.salvarCliente(cliente).subscribe(
-      resultado => {
-        console.log(resultado);
-      },
-      (error) => console.log(error)
-    )
+    this.service.salvarCliente(cliente).subscribe({
+      next(){ },
+      error(erro){
+        console.log(erro);
+      }
+    });
   }
 
   alertaDadosSalvos(){
@@ -50,20 +56,13 @@ export class CriarContaComponent implements OnInit {
   }
 
   validaSenhas() {
-    if (this.form.controls["senha"].value != this.form.controls["confirmacaoSenha"].value) {
-      // this.senha.setErrors({camposDivergentes: true});
-      this.form.controls["confirmacaoSenha"].setErrors({camposDivergentes: true});
-      return 'Os campos estão distintos';
-    } else{
-      this.form.controls["senha"].setErrors(null);
-      this.form.controls["confirmacaoSenha"].setErrors(null);
+    if (this.form.controls["senha"].value != this.form.controls["confirmacaoSenha"].value) this.form.controls["confirmacaoSenha"].setErrors({camposDivergentes: true});
 
-      return null;
-    }
+      return this.form.controls["confirmacaoSenha"].hasError('camposDivergentes') ? 'As senhas devem ser iguais' : '';
   }
 
-  getErrorMessage() {
-    if ((this.form.controls["email"].hasError('required')) || (this.form.controls["nome"].hasError('required'))) {
+  validaEmail() {
+    if (this.form.controls["email"].hasError('required')) {
       return 'Este campo é obrigatório';
     }
 

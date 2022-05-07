@@ -34,25 +34,37 @@ export class CriarContaComponent implements OnInit {
   }
 
   salvarDadosCliente() {
-    //isso só acontece em casos de sucesso
-    this.alertaDadosSalvos();
-    this.router.navigateByUrl('componentes/login');
-
-    //para erros devemos adicionar um alertaDadosNaoSalvos
+    let tipoExecucao: String;
     const cliente: CriarConta = {nome: this.form.controls["nome"].value, email: this.form.controls["email"].value, senha: this.form.controls["senha"].value};
-    this.service.salvarCliente(cliente).subscribe({
-      next(){ },
-      error(erro){
-        console.log(erro);
+    this.service.salvarCliente(cliente)
+      .subscribe({
+        next: () => {
+          tipoExecucao = "sucesso";
+          this.alertaDados(tipoExecucao);
+          this.router.navigateByUrl('componentes/login');
+        },
+        error: () => {
+          tipoExecucao = "falha";
+          this.alertaDados(tipoExecucao);
+        }
       }
-    });
+    );
   }
 
-  alertaDadosSalvos(){
-    this.snackBar.open("Conta criada com sucesso.", undefined, {
-      duration: 2000,
-      panelClass: ['snackbar-tema'],
-    });
+  alertaDados(tipoExecucao: String){
+    switch (tipoExecucao) {
+      case "sucesso":
+        this.snackBar.open("Conta criada com sucesso.", undefined, {
+          duration: 2000,
+          panelClass: ['snackbar-tema'],
+        });
+        break;
+      case "falha":
+        this.snackBar.open("Serviço indisponível no momento, tente novamente mais tarde.", undefined, {
+          duration: 2000,
+          panelClass: ['snackbar-tema'],
+        });
+    }
   }
 
   validaSenhas() {

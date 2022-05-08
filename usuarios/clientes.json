@@ -5,24 +5,6 @@
       "nome": "Giselle",
       "email": "email@email.com",
       "senha": "senha"
-    },
-    {
-      "nome": "Cristininho",
-      "email": "cris@cris",
-      "senha": "123",
-      "id": "TCjm4i1"
-    },
-    {
-      "nome": "Teste",
-      "email": "teste@teste",
-      "senha": "123",
-      "id": "BTwPGF6"
-    },
-    {
-      "nome": "Teste2",
-      "email": "teste@teste",
-      "senha": "1234",
-      "id": "K1tYbPO"
     }
   ]
 }

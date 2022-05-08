@@ -22,4 +22,8 @@ export class SalvarClienteService {
   salvarCliente(cliente: CriarConta): Observable<CriarConta>{
     return this.httpClient.post<CriarConta>(this.url, cliente);
   }
+
+  lerClientes(): Observable<CriarConta[]>{
+    return this.httpClient.get<CriarConta[]>(this.url);
+  }
 }

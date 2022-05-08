@@ -1,4 +1,4 @@
-import { CriarConta } from './../models/criar-conta.model';
+import { CriarConta } from './../../models/criar-conta.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';

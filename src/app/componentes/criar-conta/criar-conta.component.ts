@@ -1,4 +1,5 @@
-import { SalvarClienteService } from './../../services/salvar-cliente.service';
+import { GeralService } from './../../services/geral/geral.service';
+import { SalvarClienteService } from './../../services/salvar-cliente/salvar-cliente.service';
 import { CriarConta } from './../../models/criar-conta.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -15,11 +16,13 @@ export class CriarContaComponent implements OnInit {
   form: FormGroup;
   hideSenha = true;
   hideConfirmacaoSenha = true;
+  loading = this.geralService.loading;
 
   constructor(
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private service: SalvarClienteService,
+    private salvarClienteService: SalvarClienteService,
+    private geralService: GeralService,
     private router: Router
     ) { }
 
@@ -30,20 +33,23 @@ export class CriarContaComponent implements OnInit {
       senha: new FormControl('', [Validators.required]),
       confirmacaoSenha: new FormControl('', [Validators.required]),
     });
-
   }
 
   salvarDadosCliente() {
     let tipoExecucao: String;
     const cliente: CriarConta = {nome: this.form.controls["nome"].value, email: this.form.controls["email"].value, senha: this.form.controls["senha"].value};
-    this.service.salvarCliente(cliente)
+    this.geralService.show();
+
+    this.salvarClienteService.salvarCliente(cliente)
       .subscribe({
         next: () => {
+          this.geralService.hide();
           tipoExecucao = "sucesso";
           this.alertaDados(tipoExecucao);
           this.router.navigateByUrl('componentes/login');
         },
         error: () => {
+          this.geralService.hide();
           tipoExecucao = "falha";
           this.alertaDados(tipoExecucao);
         }

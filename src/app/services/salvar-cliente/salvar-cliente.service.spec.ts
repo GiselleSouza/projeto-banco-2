@@ -1,6 +1,5 @@
+import { SalvarClienteService } from './salvar-cliente.service';
 import { TestBed } from '@angular/core/testing';
-
-import { SalvarClienteService } from '../services/salvar-cliente.service';
 
 describe('SalvarClienteService', () => {
   let service: SalvarClienteService;

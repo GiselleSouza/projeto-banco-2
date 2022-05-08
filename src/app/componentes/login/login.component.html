@@ -3,17 +3,24 @@
     <mat-card-title class="corTitulo">EduSynk Bank</mat-card-title>
   </mat-card>
 
-  <mat-card class="cardCentral">
-    <mat-card-content>
-      <b>Digite suas credenciais</b>
-      <mat-form-field class="largura100 marginTop5">
-        <mat-label>E-mail</mat-label>
-        <input matInput>
-      </mat-form-field>
-      <mat-form-field class="largura100">
-        <mat-label>Senha</mat-label>
-        <input matInput type="password">
-      </mat-form-field>
-    </mat-card-content>
-  </mat-card>
+  <form [formGroup]="form" (ngSubmit)="realizarLogin()">
+    <mat-card class="cardCentral">
+      <mat-card-subtitle class="corTitulo fontSizeTitulo">Digite suas credenciais</mat-card-subtitle>
+      <mat-card-content>
+        <mat-form-field class="largura100 marginTop5">
+          <mat-label>E-mail</mat-label>
+          <input matInput placeholder="exemplo@exemplo.com" formControlName="email" name="email" required>
+          <!-- <mat-error *ngIf="form.get('email')?.hasError('required') || form.get('email')?.hasError('email')">{{validaEmail()}}</mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="largura100">
+          <mat-label>Senha</mat-label>
+          <input matInput type="password" formControlName="senha" required>
+        </mat-form-field>
+      </mat-card-content>
+      <button mat-flat-button class="largura50 ajustesBotao" type="submit" [disabled]="!form.valid">Entrar</button>
+      <mat-card-content class="marginTop5 fontSizeRodape">
+        <div class="centralizarTexto">Ainda não tem conta? <a class="corTitulo" routerLink="../../componentes/criar-conta">Crie uma aqui</a>.</div>
+      </mat-card-content>
+    </mat-card>
+  </form>
 </div>

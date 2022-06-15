@@ -1,0 +1,46 @@
+<mat-card style="margin-bottom: 3%">
+  <mat-card-title class="corTitulo">Bem vindx, {{nomeCliente}}</mat-card-title>
+  <mat-card-subtitle>
+    <div id="displayFlex">
+      <label id="valorSaldo" [ngClass]="(!showSaldo) ? '': 'blur'">{{saldo | currency}}</label>
+      <mat-icon matSuffix (click)="showSaldo = !showSaldo">{{showSaldo ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </div>
+  </mat-card-subtitle>
+</mat-card>
+
+<mat-grid-list cols="4" rowHeight="2:1" gutterSize="30px">
+  <mat-grid-tile colspan="1">
+    <!-- criar rota -->
+    <mat-card class="sizeCard cursor" routerLink="../criar-conta">
+      <mat-card-title class="corTitulo">Extrato</mat-card-title>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <mat-card class="sizeCard">
+      <mat-card-title class="corDisabled">Pagamentos</mat-card-title>
+    </mat-card>  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <mat-card class="sizeCard">
+      <mat-card-title class="corDisabled">Transferências</mat-card-title>
+    </mat-card>  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <mat-card class="sizeCard">
+      <mat-card-title class="corDisabled">Empréstimo</mat-card-title>
+    </mat-card>  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <mat-card class="sizeCard">
+      <mat-card-title class="corDisabled">Cartões</mat-card-title>
+    </mat-card>  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <mat-card class="sizeCard">
+      <mat-card-title class="corDisabled">Consórcio</mat-card-title>
+    </mat-card>  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <mat-card class="sizeCard">
+      <mat-card-title class="corDisabled">Investimentos</mat-card-title>
+    </mat-card>  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <mat-card class="sizeCard">
+      <mat-card-title class="corDisabled">PIX</mat-card-title>
+    </mat-card>  </mat-grid-tile>
+</mat-grid-list>

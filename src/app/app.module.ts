@@ -15,12 +15,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PainelComponent } from './componentes/painel/painel.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core';
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localePt, 'pt');
 
 @NgModule({
   declarations: [
     AppComponent,
     CriarContaComponent,
     LoginComponent,
+    PainelComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,9 +44,17 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatIconModule,
     HttpClientModule,
     AppRoutingModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatGridListModule
   ],
-  providers: [],
+  providers: [{
+    provide: LOCALE_ID,
+    useValue: 'pt'
+  },
+  {
+    provide:  DEFAULT_CURRENCY_CODE,
+    useValue: 'BRL'
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

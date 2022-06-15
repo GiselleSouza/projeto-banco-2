@@ -1,0 +1,28 @@
+.corTitulo{
+  color: #c1936b;
+}
+
+.corDisabled{
+  color: #757575;
+}
+
+.blur {
+  filter: blur(5px);
+}
+
+#displayFlex{
+  display: flex;
+}
+
+#valorSaldo{
+  margin-right: 1%;
+  font-size: large;
+}
+
+.sizeCard{
+  padding: 100%;
+}
+
+.cursor{
+  cursor: pointer;
+}

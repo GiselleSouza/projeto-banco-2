@@ -1,5 +1,5 @@
 export interface CriarConta{
-  id?: number | string;
+  id: string;
   nome: String,
   email: String,
   senha: String

@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class SalvarClienteService {
 
   private listaClientes: any[];
+  private cliente: CriarConta;
   private url = 'http://localhost:3000/clientes';
 
   constructor(private httpClient: HttpClient) {
@@ -25,5 +26,13 @@ export class SalvarClienteService {
 
   lerClientes(): Observable<CriarConta[]>{
     return this.httpClient.get<CriarConta[]>(this.url);
+  }
+
+  salvarClienteLogin(cliente: CriarConta){
+    this.cliente = cliente;
+  }
+
+  obterClienteLogin(): CriarConta{
+    return this.cliente;
   }
 }

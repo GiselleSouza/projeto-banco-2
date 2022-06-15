@@ -12,11 +12,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./criar-conta.component.css']
 })
 export class CriarContaComponent implements OnInit {
-
   form: FormGroup;
   hideSenha = true;
   hideConfirmacaoSenha = true;
   loading = this.geralService.loading;
+  clientes: CriarConta[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,11 +33,22 @@ export class CriarContaComponent implements OnInit {
       senha: new FormControl('', [Validators.required]),
       confirmacaoSenha: new FormControl('', [Validators.required]),
     });
+
+    this.salvarClienteService.lerClientes().subscribe({
+      next: (clientes: CriarConta[]) => {
+        this.clientes = clientes;
+      },
+      error: () => {
+        this.alertaDados("falha");
+      }
+    });
   }
 
   salvarDadosCliente() {
     let tipoExecucao: String;
-    const cliente: CriarConta = {nome: this.form.controls["nome"].value, email: this.form.controls["email"].value, senha: this.form.controls["senha"].value};
+    const idAntigo = Number.parseInt(this.clientes[(this.clientes.length) - 1].id);
+    const id = idAntigo + 1;
+    const cliente: CriarConta = {id: id.toString(), nome: this.form.controls["nome"].value, email: this.form.controls["email"].value, senha: this.form.controls["senha"].value};
     this.geralService.show();
 
     this.salvarClienteService.salvarCliente(cliente)

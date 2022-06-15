@@ -3,6 +3,7 @@ import { CriarConta } from './../../models/criar-conta.model';
 import { SalvarClienteService } from './../../services/salvar-cliente/salvar-cliente.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private salvarCliente: SalvarClienteService,
     private snackBar: MatSnackBar,
+    private route: Router
   ) { }
 
   ngOnInit() {
@@ -54,6 +56,7 @@ export class LoginComponent implements OnInit {
 
   validarSenha(cliente: CriarConta){
     if(cliente.senha === this.form.controls["senha"].value){
+      this.salvarCliente.salvarClienteLogin(cliente);
       this.alertaSnackBar("loginSucesso");
     } else {
       this.alertaSnackBar("usuarioInexistente");
@@ -69,6 +72,7 @@ export class LoginComponent implements OnInit {
         });
         break;
       case "loginSucesso":
+        this.route.navigate(['../../componentes/painel']);
         this.snackBar.open("Login realizado com sucesso.", undefined, {
           duration: 2000,
           panelClass: ['snackbar-tema'],
